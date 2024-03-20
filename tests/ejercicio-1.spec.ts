@@ -7,6 +7,38 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+describe("CSVProcessor", () => {
+  it("should correctly parse CSV content", () => {
+    const processor = new CSVProcessor();
+    const content = "1,10,60\n2,20,100\n3,30,120\n";
+    const result = processor.parseContent(content);
+    expect(result).to.deep.equal([
+      { itemNumber: 1, weight: 10, benefit: 60 },
+      { itemNumber: 2, weight: 20, benefit: 100 },
+      { itemNumber: 3, weight: 30, benefit: 120 },
+    ]);
+  });
+});
+
+describe("JSONProcessor", () => {
+  it("should correctly parse JSON content", () => {
+    const processor = new JSONProcessor();
+    const content = JSON.stringify({
+      elementos: [
+        { numElemento: 1, peso: 10, beneficio: 60 },
+        { numElemento: 2, peso: 20, beneficio: 100 },
+        { numElemento: 3, peso: 30, beneficio: 120 },
+      ],
+    });
+    const result = processor.parseContent(content);
+    expect(result).to.deep.equal([
+      { itemNumber: 1, weight: 10, benefit: 60 },
+      { itemNumber: 2, weight: 20, benefit: 100 },
+      { itemNumber: 3, weight: 30, benefit: 120 },
+    ]);
+  });
+});
+
 describe("FileProcessor", () => {
   it("should correctly process JSON content", () => {
     const processor = new JSONProcessor();
