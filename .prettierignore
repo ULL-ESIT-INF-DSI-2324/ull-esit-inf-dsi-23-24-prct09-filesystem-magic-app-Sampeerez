@@ -1,0 +1,16 @@
+dist
+test
+docs
+node_modules
+package-lock.json
+package.json
+tsconfig.json
+typedoc.json
+.eslintignore
+.eslintrc.json
+.gitignore
+.mocharc.json
+.prettierrc.json
+.nyc_output
+.pretterignore
+README.md

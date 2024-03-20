@@ -1,0 +1,32 @@
+{
+  "name": "ull-esit-inf-dsi-23-24-prct09-filesystem-magic-app-sampeerez",
+  "version": "1.0.0",
+  "description": "[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/T5K9tzcv)",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "doc": "typedoc",
+    "coverage": "c8 npm test && c8 report --reporter=lcov",
+    "ejercicio1": "tsc-watch --onSuccess \"node dist/ejercicio-1.js\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.3.13",
+    "@types/mocha": "^10.0.6",
+    "@typescript-eslint/eslint-plugin": "^7.3.1",
+    "@typescript-eslint/parser": "^7.3.1",
+    "c8": "^9.1.0",
+    "chai": "^4.4.1",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "mocha": "^10.3.0",
+    "nyc": "^15.1.0",
+    "prettier": "^3.2.5",
+    "ts-node": "^10.9.2",
+    "tsc-watch": "^6.0.4",
+    "typedoc": "^0.25.12",
+    "typescript": "^5.4.2"
+  }
+}
