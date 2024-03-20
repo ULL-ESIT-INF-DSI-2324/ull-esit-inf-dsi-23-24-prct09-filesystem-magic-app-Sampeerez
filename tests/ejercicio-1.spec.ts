@@ -1,13 +1,30 @@
 import 'mocha';
-import {expect} from 'chai';
-import {add} from "../src/ejercicio-1.js";
+import { expect } from 'chai';
+import { JSONProcessor } from '../src/ejercicio_practica/jsonProcessor.js';
+import { CSVProcessor } from '../src/ejercicio_practica/csvProcessor.js';
+import * as path from 'path';
+import { fileURLToPath } from 'url';
 
-describe("add function tests", () => {
-  it("add(1, 8) returns value 9", () => {
-    expect(add(1, 8)).to.be.equal(9);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+describe('FileProcessor', () => {
+  it('should correctly process JSON content', () => {
+    const processor = new JSONProcessor();
+    const filename = path.resolve(__dirname, '../src/ejercicio_practica/ejemplo_json.json'); 
+    const result = processor.process(filename);
+    expect(result).to.deep.equal({
+      benefits: [60, 100, 120],
+      weights: [10, 20, 30]
+    });
   });
 
-  it("add(-1, 8) returns value 7", () => {
-    expect(add(-1, 8)).to.be.equal(7);
+  it('should correctly process CSV content', () => {
+    const processor = new CSVProcessor();
+    const filename = path.resolve(__dirname, '../src/ejercicio_practica/ejemplo_csv.csv'); 
+    const result = processor.process(filename);
+    expect(result).to.deep.equal({
+      benefits: [60, 100, 120],
+      weights: [10, 20, 30]
+    });
   });
 });
