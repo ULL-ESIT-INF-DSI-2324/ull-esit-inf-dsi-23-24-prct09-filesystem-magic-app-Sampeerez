@@ -8,13 +8,14 @@
     "test": "mocha",
     "doc": "typedoc",
     "coverage": "c8 npm test && c8 report --reporter=lcov",
-    "ejercicio1": "tsc-watch --onSuccess \"node dist/ejercicio-1.js\""
+    "dev": "tsc-watch --onSuccess \"node dist/ejercicio-1/index.js\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/chai": "^4.3.13",
+    "@types/chalk": "^2.2.0",
     "@types/mocha": "^10.0.6",
     "@types/node": "^20.11.30",
     "@types/yargs": "^17.0.32",

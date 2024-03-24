@@ -1,7 +1,7 @@
 {
   "entryPoints": ["src/*.ts"],
   "out": "./docs",
-  "name": "Práctica 4 DSI",
+  "name": "Práctica 9 DSI",
   "exclude": ["**/*.spec.ts"],
   "theme": "default",
   "readme": "README.md",
