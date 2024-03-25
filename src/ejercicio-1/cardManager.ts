@@ -1,17 +1,29 @@
-import chalk from 'chalk';
-import fs from 'fs';
-import { Card, Color, Type } from './card.js';
-import { SystemManager as SM } from './systemManager.js';
+import chalk from "chalk";
+import fs from "fs";
+import { Card } from "./card.js";
+import { SystemManager as SM } from "./systemManager.js";
 
+/**
+ * Class representing a card manager.
+ */
 export class CardManager {
+  /**
+   * Create a card manager.
+   */
   constructor() {}
 
+  /**
+   * Add a card to a user's collection.
+   * @param {string} user - The user's name.
+   * @param {Card} card - The card to add.
+   */
   public addCard(user: string, card: Card): void {
     const userDirectory = SM.getDirectoryFrom(user);
     const cardFilePath = SM.getCardFilePath(user, card.getId());
 
     try {
-      if (!fs.existsSync(userDirectory)) fs.mkdirSync(userDirectory, { recursive: true });
+      if (!fs.existsSync(userDirectory))
+        fs.mkdirSync(userDirectory, { recursive: true });
 
       if (SM.cardExistsIn(cardFilePath)) {
         console.log(SM.CARD_ALREADY_EXISTS(user));
@@ -24,6 +36,11 @@ export class CardManager {
     }
   }
 
+  /**
+   * Update a card in a user's collection.
+   * @param {string} user - The user's name.
+   * @param {Card} card - The card to update.
+   */
   public updateCard(user: string, card: Card): void {
     const cardFilePath = SM.getCardFilePath(user, card.getId());
 
@@ -39,6 +56,11 @@ export class CardManager {
     }
   }
 
+  /**
+   * Remove a card from a user's collection.
+   * @param {string} user - The user's name.
+   * @param {number} cardID - The ID of the card to remove.
+   */
   public removeCard(user: string, cardID: number): void {
     const cardFilePath = SM.getCardFilePath(user, cardID);
 
@@ -54,6 +76,11 @@ export class CardManager {
     }
   }
 
+  /**
+   * Show a card from a user's collection.
+   * @param {string} user - The user's name.
+   * @param {number} cardID - The ID of the card to show.
+   */
   public showCard(user: string, cardID: number): void {
     const cardFilePath = SM.getCardFilePath(user, cardID);
 
@@ -69,9 +96,13 @@ export class CardManager {
     }
   }
 
+  /**
+   * List all cards in a user's collection.
+   * @param {string} user - The user's name.
+   */
   public listCollection(user: string): void {
     const dirPath = SM.getDirectoryFrom(user);
-  
+
     try {
       if (fs.existsSync(dirPath)) {
         const files = fs.readdirSync(dirPath);
@@ -91,8 +122,24 @@ export class CardManager {
     }
   }
 
+  /**
+   * Format a card for printing.
+   * @param {string} card - The card to format.
+   * @return {string} The formatted card.
+   */
   private formatCard(card: string): string {
-    const { id, nombre, costeDeMana, color, lineaDeTipo, rareza, textoDeReglas, valorDeMercado, fuerzaYResistencia, marcasDeLealtad } = JSON.parse(card);
+    const {
+      id,
+      nombre,
+      costeDeMana,
+      color,
+      lineaDeTipo,
+      rareza,
+      textoDeReglas,
+      valorDeMercado,
+      fuerzaYResistencia,
+      marcasDeLealtad,
+    } = JSON.parse(card);
     let contenido = `
     ID: ${id}
     Nombre: ${nombre}
@@ -102,12 +149,18 @@ export class CardManager {
     Rareza: ${rareza}
     Texto de reglas: ${textoDeReglas}
     Valor de mercado: ${valorDeMercado}`;
-  
-    if (lineaDeTipo === "Creature") contenido += `\n    Fuerza/Resistencia: ${fuerzaYResistencia.join('/')}`;
-    else if (lineaDeTipo === "Planeswalker") contenido += `\n    Marcas de lealtad: ${marcasDeLealtad}`;
+
+    if (lineaDeTipo === "Creature")
+      contenido += `\n    Fuerza/Resistencia: ${fuerzaYResistencia.join("/")}`;
+    else if (lineaDeTipo === "Planeswalker")
+      contenido += `\n    Marcas de lealtad: ${marcasDeLealtad}`;
     return contenido;
   }
-  
+
+  /**
+   * Print a card.
+   * @param {string} card - The card to print.
+   */
   private printCard(card: string): void {
     const JSONcard = JSON.parse(card);
     const cardInfo = this.formatCard(card);
@@ -131,15 +184,22 @@ export class CardManager {
         console.log(chalk.gray.bold(cardInfo));
         break;
       case "Multicolor":
-        const colors = [chalk.red, chalk.green, chalk.yellow, chalk.blue, chalk.magenta, chalk.cyan];
-        let coloredText = '';
+        const colors = [
+          chalk.red,
+          chalk.green,
+          chalk.yellow,
+          chalk.blue,
+          chalk.magenta,
+          chalk.cyan,
+        ];
+        let coloredText = "";
         for (let i = 0; i < cardInfo.length; i++) {
           coloredText += colors[i % colors.length](cardInfo[i]);
         }
         console.log(coloredText);
         break;
       default:
-        console.log(chalk.red.bold('Unknown color'));
+        console.log(chalk.red.bold("Unknown color"));
         break;
     }
   }
