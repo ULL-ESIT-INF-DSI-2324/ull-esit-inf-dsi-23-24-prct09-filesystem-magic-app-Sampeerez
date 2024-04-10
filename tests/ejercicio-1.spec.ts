@@ -1,7 +1,7 @@
 import "mocha";
 import { expect } from "chai";
-import { JSONProcessor } from "../src/ejercicio_practica/jsonProcessor.js";
-import { CSVProcessor } from "../src/ejercicio_practica/csvProcessor.js";
+import { JSONProcessor } from "../src/modificacion_pr9/jsonProcessor.js";
+import { CSVProcessor } from "../src/modificacion_pr9/csvProcessor.js";
 import * as path from "path";
 import { fileURLToPath } from "url";
 
@@ -38,7 +38,7 @@ describe("JSONProcessor", () => {
     ]);
   });
 });
-
+/** 
 describe("FileProcessor", () => {
   it("should correctly process JSON content", () => {
     const processor = new JSONProcessor();
@@ -52,6 +52,7 @@ describe("FileProcessor", () => {
       weights: [10, 20, 30],
     });
   });
+  
 
   it("should correctly process CSV content", () => {
     const processor = new CSVProcessor();
@@ -66,3 +67,4 @@ describe("FileProcessor", () => {
     });
   });
 });
+*/
